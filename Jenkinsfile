@@ -16,7 +16,7 @@ pipeline{
 		steps {
 			sh'rm trufflhog || true'
 			sh'docker pull gesellix/trufflehog'
-			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/IACSD_PROJECT.git > trufflehog'	
+			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog'	
 			sh 'cat trufflehog'
  		      }
 
@@ -25,9 +25,9 @@ pipeline{
 		stage ('Dependency Check') {
 		steps {
 			sh 'rm owasp* || true'
-			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/IACSD_PROJECT/master/DC.sh"'
-			sh 'chmod +x DC.sh'
-			sh './DC.sh || true '
+			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"'
+			sh 'chmod +x dc.sh'
+			sh './dc.sh || true '
 	
 			}
  			}
