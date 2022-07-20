@@ -55,7 +55,15 @@ pipeline{
 			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
 			  
 			}
+		}
+		stage('DAST') {
+		 steps {
+	 		sshagent(['zap']) {
+	   		sh 'ssh -o StrictKeyhostChecking=no shuahri@192.168.80.103 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.80.101:8080/webapp/"'
+			}
+			}
 
-		} 
+}
+		
              }
 	}
