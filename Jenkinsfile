@@ -35,7 +35,10 @@ pipeline{
 		steps {
 		withSonarQubeEnv('sonar') {
 			//sh 'docker start sonarqube'
-			sh 'mvn sonar:sonar || true'
+	//		sh 'mvn clean install  sonar:sonar -Dsonar.host.url=<Server_URL> -Dsonar.login=<Token_For_Your_User_Id> -Dsonar.projectKey=<It will be calculated by default using group id & artifact id but its advisable that you use a unique string for all users> -Dsonar.projectName=<Descriptive Project Name to show on dashboard> -Dsonar.projectVersion=<if you wish to specify a version number>
+'
+			sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
+			//sh 'mvn sonar:sonar || true'
 			//sh 'mvn sonar:sonar -Dsonar.projectKey=group1 -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_76829e1cdc1af5936e79ac3d0cb50d5f4f13c5c8 || true'
 			sh 'cat target/sonar/report-task.txt'
 		}
