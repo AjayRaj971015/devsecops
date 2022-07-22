@@ -35,9 +35,8 @@ pipeline{
 		steps {
 		withSonarQubeEnv('sonar') {
 			//sh 'docker start sonarqube'
-	//		sh 'mvn clean install  sonar:sonar -Dsonar.host.url=<Server_URL> -Dsonar.login=<Token_For_Your_User_Id> -Dsonar.projectKey=<It will be calculated by default using group id & artifact id but its advisable that you use a unique string for all users> -Dsonar.projectName=<Descriptive Project Name to show on dashboard> -Dsonar.projectVersion=<if you wish to specify a version number>
-
-			sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
+			sh 'mvn clean install  sonar:sonar -Dsonar.host.url=http://192.168.80.100:900 -Dsonar.login=sqa_5f39772be0b45586ef2e8d140d16c577788ebdaa -Dsonar.projectName=iacsd_projevt1'
+			//sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
 			//sh 'mvn sonar:sonar || true'
 			//sh 'mvn sonar:sonar -Dsonar.projectKey=group1 -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_76829e1cdc1af5936e79ac3d0cb50d5f4f13c5c8 || true'
 			sh 'cat target/sonar/report-task.txt'
@@ -56,8 +55,8 @@ pipeline{
 		  steps {
 		  //sshagent(['192.168.80.101'])
 			sh'cd $WORKSPACE'
-			//sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
-			sh'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/DSO/target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'  
+			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
+			//sh'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/DSO/target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'  
 			}
 		}
 		stage('DAST') {
