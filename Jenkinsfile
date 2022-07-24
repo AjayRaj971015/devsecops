@@ -14,6 +14,7 @@ pipeline{
  			            }
 		stage ('check-git-secrets') {
 		steps {
+			//sh'cd $WORKSPACE'
 			sh'rm trufflhog || true'
 			sh'docker pull gesellix/trufflehog'
 			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog'	
@@ -24,6 +25,7 @@ pipeline{
 		
 		stage ('Dependency Check') {
 		steps {
+			//sh'cd $WORKSPACE'
 			sh 'rm owasp* || true'
 			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"'
 			sh 'chmod +x dc.sh'
@@ -34,7 +36,8 @@ pipeline{
 		stage('SAST') {
 		steps {
 		withSonarQubeEnv('sonar') {
-			//sh 'docker start sonarqube'
+			//sh'cd $WORKSPACE'
+			sh 'docker start sonarqube'
 			//sh 'mvn clean install  sonar:sonar -Dsonar.host.url=http://192.168.80.100:900 -Dsonar.login=sqa_5f39772be0b45586ef2e8d140d16c577788ebdaa -Dsonar.projectName=iacsd_projevt1'
 			//sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
 			sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_5f39772be0b45586ef2e8d140d16c577788ebdaa'
@@ -48,6 +51,7 @@ pipeline{
 
 		stage ('build') {
 			steps {
+				//sh'cd $WORKSPACE'
 			 	sh 'mvn clean package'
                 		
 			      }
@@ -62,6 +66,7 @@ pipeline{
 		}
 		stage('DAST') {
 		 steps {
+			//sh'cd $WORKSPACE'
 	 		sshagent(['zap']) {
 	   		sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.80.101:8080/webapp/" || true'
 			}
