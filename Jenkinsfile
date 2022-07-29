@@ -17,8 +17,12 @@ pipeline{
 			//sh'cd $WORKSPACE'
 			sh'rm trufflhog || true'
 			sh'docker pull gesellix/trufflehog'
-			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog'	
-			sh 'cat trufflehog'
+			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog.txt'	
+			sh 'cat trufflehog.txt'
+			archiveArtifacts artifacts: 'trufflehog.txt', onlyIfSuccessful: true
+                        emailext attachLog: true, attachmentsPattern: 'trufflehog*', 
+                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n IACSD-Project Group-1", 
+                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "maskoff.ajayraj@gmail.com"
  		      }
 
 				             }
@@ -60,7 +64,7 @@ pipeline{
 		  steps {
 		  //sshagent(['192.168.80.101'])
 			sh'cd $WORKSPACE'
-			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "rm /opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war"'
+			//sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "rm /opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war"'
 			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
 			//sh'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/DSO/target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'  
 			}
