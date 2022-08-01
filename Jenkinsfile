@@ -20,9 +20,13 @@ pipeline{
 			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog.txt'	
 			sh 'cat trufflehog.txt'
 			archiveArtifacts artifacts: 'trufflehog.txt', onlyIfSuccessful: true
-                        emailext attachLog: true, attachmentsPattern: 'trufflehog*', 
-                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n IACSD-Project Group-1", 
-                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "ajayrajadmane.97@gmail.com"
+                        emailext attachLog: true, attachmentsPattern: 'trufflehog_*', 
+                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n CDAC-Project Group-1", 
+                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "maskoff.ajayraj@gmail.com"
+			//archiveArtifacts artifacts: 'trufflehog.txt', onlyIfSuccessful: true
+                        //emailext attachLog: true, attachmentsPattern: 'trufflehog*', 
+                        //body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n IACSD-Project Group-1", 
+                        //subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "ajayrajadmane.97@gmail.com"
  		      }
 
 				             }
