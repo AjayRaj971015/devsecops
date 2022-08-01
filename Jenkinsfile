@@ -22,7 +22,7 @@ pipeline{
 			archiveArtifacts artifacts: 'trufflehog.txt', onlyIfSuccessful: true
                         emailext attachLog: true, attachmentsPattern: 'trufflehog*', 
                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n IACSD-Project Group-1", 
-                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "maskoff.ajayraj@gmail.com"
+                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "ajayrajadmane.97@gmail.com"
  		      }
 
 				             }
