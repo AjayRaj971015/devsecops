@@ -11,7 +11,16 @@ pipeline{
 				echo "M2_HOME = ${M2_HOME}"
 			    '''
 		      }
- 			            }
+ 		}
+		stage('Install Dependencies') {
+            	steps {
+                	sh 'cd $WORKSPACE'
+         //       sh 'rm -rf CDAC-Project'
+ 	               git branch: "master",
+                    	url: "https://github.com/AjayRaj971015/devsecops"
+                	sh 'ls'
+            }
+        }
 		stage ('check-git-secrets') {
 		steps {
 			sh'cd $WORKSPACE'
