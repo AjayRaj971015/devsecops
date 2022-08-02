@@ -44,7 +44,7 @@ pipeline{
 		stage('SAST') {
 		steps {
 		withSonarQubeEnv('sonar') {
-			//sh'cd $WORKSPACE'
+			sh'cd $WORKSPACE'
 			sh 'docker start sonarqube'
 			sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_08dbe64db1b8f4d5d7b6a765609fa3279d35e1a3'
 			sh 'cat target/sonar/report-task.txt'
