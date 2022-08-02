@@ -55,7 +55,7 @@ pipeline{
 		withSonarQubeEnv('sonar') {
 			sh'cd $WORKSPACE'
 			sh 'docker start sonarqube'
-			sh 'mvn clean install sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_08dbe64db1b8f4d5d7b6a765609fa3279d35e1a3'
+			sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_4b50620d1e7ac55fa453b140ad94ea733a981f8f'
 			
 			//sh 'mvn clean install sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_08dbe64db1b8f4d5d7b6a765609fa3279d35e1a3 -Dsonar.projectKey=Group1'
 			//sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
