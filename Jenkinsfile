@@ -14,7 +14,7 @@ pipeline{
  			            }
 		stage ('check-git-secrets') {
 		steps {
-			//sh'cd $WORKSPACE'
+			sh'cd $WORKSPACE'
 			sh'rm trufflhog || true'
 			sh'docker pull gesellix/trufflehog'
 			sh'docker run -t gesellix/trufflehog --json https://github.com/AjayRaj971015/devsecops.git > trufflehog.txt'	
@@ -46,12 +46,13 @@ pipeline{
 		withSonarQubeEnv('sonar') {
 			//sh'cd $WORKSPACE'
 			sh 'docker start sonarqube'
+			sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_08dbe64db1b8f4d5d7b6a765609fa3279d35e1a3'
+			sh 'cat target/sonar/report-task.txt'
 			//sh 'mvn clean install  sonar:sonar -Dsonar.host.url=http://192.168.80.100:900 -Dsonar.login=sqa_5f39772be0b45586ef2e8d140d16c577788ebdaa -Dsonar.projectName=iacsd_projevt1'
 			//sh 'mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1'
-			sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_5f39772be0b45586ef2e8d140d16c577788ebdaa'
 			//sh 'mvn sonar:sonar || true'
 			//sh 'mvn sonar:sonar -Dsonar.projectKey=group1 -Dsonar.host.url=http://192.168.80.100:9000 -Dsonar.login=sqa_76829e1cdc1af5936e79ac3d0cb50d5f4f13c5c8 || true'
-			sh 'cat target/sonar/report-task.txt'
+			
 		}
 
 	}
