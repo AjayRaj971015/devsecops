@@ -15,7 +15,6 @@ pipeline{
 		stage('Install Dependencies') {
             	steps {
                 	sh 'cd $WORKSPACE'
-         //       sh 'rm -rf CDAC-Project'
  	               git branch: "master",
                     	url: "https://github.com/AjayRaj971015/devsecops"
                 	sh 'ls'
@@ -32,17 +31,14 @@ pipeline{
                        // emailext attachLog: true, attachmentsPattern: 'trufflehog_*', 
                         //body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n CDAC-Project Group-1", 
                         //subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "maskoff.ajayraj@gmail.com"
-			//archiveArtifacts artifacts: 'trufflehog.txt', onlyIfSuccessful: true
-                        //emailext attachLog: true, attachmentsPattern: 'trufflehog*', 
-                        //body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n Thankyou,\n IACSD-Project Group-1", 
-                        //subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - success", mimeType: 'text/html', to: "ajayrajadmane.97@gmail.com"
+			
  		      }
 
 				             }
 		
 		stage ('Dependency Check') {
 		steps {
-			//sh'cd $WORKSPACE'
+			sh'cd $WORKSPACE'
 			sh 'rm owasp* || true'
 			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"'
 			sh 'chmod +x dc.sh'
@@ -80,7 +76,7 @@ pipeline{
 		  steps {
 		  //sshagent(['192.168.80.101'])
 			sh'cd $WORKSPACE'
-			//sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "rm /opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war" || true'
+			//sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "cd /opt/tomcat/apache-tomcat-9.0.64/bin && ./startup.sh " || true'
 			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
 			//sh'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/DSO/target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'  
 			}
