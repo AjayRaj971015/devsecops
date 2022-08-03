@@ -43,7 +43,7 @@ pipeline{
 			sh 'rm owasp* || true'
 			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"'
 			sh 'chmod +x dc.sh'
-			sh './dc.sh || ture'
+			sh './dc.sh || true'
 			//sh 'cd odc-reports'
 			//sh 'cat dependency-check-report.html '
 	
