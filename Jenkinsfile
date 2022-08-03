@@ -79,10 +79,8 @@ pipeline{
 		  steps {
 		  //sshagent(['192.168.80.101'])
 			sh'cd $WORKSPACE'
-			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "./tomcat.sh "'
-			//sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101 "cd /opt/tomcat/apache-tomcat-9.0.64/bin && ./startup.sh " || true'
-			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'
-			//sh'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/DSO/target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'  
+			sh'sshpass -p "ajay123" ssh root@192.168.80.101 "./tomcat.sh "'	
+			sh'sshpass -p "ajay123" scp -o StrictHostkeyChecking=no target/WebApp.war root@192.168.80.101:/opt/tomcat/apache-tomcat-9.0.64/webapps/webapp.war'		
 			}
 		}
 		stage('DAST') {
