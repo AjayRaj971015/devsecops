@@ -39,6 +39,7 @@ pipeline{
 		stage ('Dependency Check') {
 		steps {
 			//sh'cd $WORKSPACE'
+			sh 'cd /root'
 			sh 'rm owasp* || true'
 			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"'
 			sh 'chmod +x dc.sh'
