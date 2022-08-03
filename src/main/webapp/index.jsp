@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>DevSecOps[:-MaskoFF-: 12-07-2022]</title>
+    <title>DevSecOps[:-MaskoFF-: 03-08-2022]</title>
 
 
     <!-- Custom styles for this template -->
