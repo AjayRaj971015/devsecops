@@ -41,7 +41,7 @@ pipeline{
 			sh'cd $WORKSPACE'
 			//sh 'cd /root/'
 			sh 'rm owasp* || true'
-			sh 'wget ""'
+			sh 'wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/odc.sh"'
 			sh 'chmod +x odc.sh'
 			sh './odc.sh || true'
 			//sh 'cd odc-reports'
