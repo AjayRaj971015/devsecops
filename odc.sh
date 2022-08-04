@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /root/
+sudo cd /root/
 wget "https://raw.githubusercontent.com/AjayRaj971015/devsecops/master/dc.sh"
 chmod +x dc.sh
 ./dc.sh
