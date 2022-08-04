@@ -38,7 +38,7 @@ pipeline{
 		
 		stage ('Dependency Check') {
 		steps {
-			sh'cd $WORKSPACE'
+			//sh'cd $WORKSPACE'
 			sh './ODC.sh'
 			//sh 'cd /root/'
 			//sh 'rm owasp* || true'
