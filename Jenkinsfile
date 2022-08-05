@@ -93,7 +93,7 @@ pipeline{
 	   		//sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.80.101:8080/webapp/" || true'
 			sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "docker run --rm -v $(pwd):/zap/wrk -u $(id -u ${USER}):$(id -g ${USER}) -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.80.101:8080/webapp/ -g gen.conf -r basescan.html" || true '
 	                sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "docker run --rm -v $(pwd):/zap/wrk -u $(id -u ${USER}):$(id -g ${USER}) -t owasp/zap2docker-stable zap-full-scan.py -t http://192.168.80.101:8080/webapp/ -g gen.conf -r fullscan.html" || true '
-		         sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "sudo ./aa.sh"'
+		         sh 'sshpass -p "ajay123" ssh -o UserKnownHostsFile=/dev/null -o StrictHostkeyChecking=no shuhari@192.168.80.103 "./aa.sh"'
 			}
 			}
 
